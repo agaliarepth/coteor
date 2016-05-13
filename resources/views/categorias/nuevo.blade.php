@@ -9,7 +9,12 @@
              <section class="panel">
                     <div class="panel-body">
 
-
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Codigo</label>
+                                <input type="text" name="codigo" class="form-control" id="codigo" required  placeholder="Codigo"  value="">
+                            </div>
+                        </div>
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for="" >Descripcion</label>
@@ -17,12 +22,7 @@
                               </div>
                             </div>
 
-                              <div class="col-md-4">
-                              <div class="form-group">
-                                <label for="">Codigo</label>
-                              <input type="text" name="codigo" class="form-control" id="codigo" required  placeholder="Codigo"  value="">
-                              </div>
-                            </div>
+
 
 
                            </div>

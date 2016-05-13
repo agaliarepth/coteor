@@ -10,18 +10,18 @@
                     <div class="panel-body">
 
 
+                            <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Codigo</label>
+                                <input type="text" name="codigo_edit" class="form-control" id="codigo_edit" required  placeholder="Codigo"  value="">
+                            </div>
+                        </div>
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for="" >Descripcion</address></label>
                                 <input type="text" class="form-control" id="descripcion_edit" required name="descripcion_edit" placeholder="Descripcion categoria">
                               </div>
                             </div>
-                            <div class="col-md-4">
-                            <div class="form-group">
-                              <label for="">Codigo</label>
-                            <input type="text" name="codigo_edit" class="form-control" id="codigo_edit" required  placeholder="Codigo"  value="">
-                            </div>
-                          </div>
 
                            </div>
                     </section>

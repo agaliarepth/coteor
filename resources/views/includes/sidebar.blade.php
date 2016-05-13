@@ -47,24 +47,25 @@ c           <!-- left side start-->
                     <ul class="sub-menu-list">
                         <li><a href="{{url('/socios')}}">LISTAR SOCIOS</a></li>
                         <li><a href="{{url('/socios/create')}}"> REGISTRAR SOCIO</a></li>
-                        <li><a href="mail_view.html"> View Mail</a></li>
                     </ul>
                 </li>
 
 
 
-                <li class="menu-list"><a href=""><i class="fa fa-book"></i> <span>EQUIPOS</span></a>
+                <li class="menu-list"><a href=""><i class="fa fa-book"></i> <span>ITEMS - EQUIPOS</span></a>
                     <ul class="sub-menu-list">
 
-                        <li><a href="{{url('/equipos')}}">  EQUIPOS</a></li>
+
                         <li><a href="{{url('/categorias')}}"> CATEGORIAS</a></li>
+                        <li><a href="{{url('/items')}}">  ITEMS</a></li>
+                        <li><a href="{{url('/equipos')}}">  EQUIPOS</a></li>
 
                     </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-tasks"></i> <span>ALMACEN</span></a>
                     <ul class="sub-menu-list">
                         <li><a href="{{url('almacen/ingresos')}}"> INGRESOS</a></li>
-                        <li><a href="gallery.html"> EGRESOS</a></li>
+                        <li><a href=""> EGRESOS</a></li>
 
 
                     </ul>
@@ -75,16 +76,16 @@ c           <!-- left side start-->
 
                 <li class="menu-list"><a href=""><i class="fa fa-tasks"></i> <span>CONTRATOS</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="form_layouts.html"> LISTAR CONTRATOS</a></li>
-                        <li><a href="form_advanced_components.html"> REGISTRAR CONTRATOS</a></li>
+                        <li><a href=""> LISTAR CONTRATOS</a></li>
+                        <li><a href=""> REGISTRAR CONTRATOS</a></li>
 
                     </ul>
                 </li>
 
                 <li class="menu-list"><a href="#"><i class="fa fa-th-list"></i> <span>ODTS</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="basic_table.html"> LISTAR ODT</a></li>
-                        <li><a href="dynamic_table.html">REGISTRAR ODT</a></li>
+                        <li><a href=""> LISTAR ODT</a></li>
+                        <li><a href="">REGISTRAR ODT</a></li>
 
                     </ul>
                 </li>

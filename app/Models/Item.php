@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
      protected $table='items';
-     protected $fillable=['descripcion','codigo','tipo','estado','fecha_alta','categorias_id'];
+     protected $fillable=['descripcion','codigo','tipo','estado','unidad','fecha_alta','categorias_id'];
      protected $hidden=[];
 
   public function categoria(){
-     return $this->belogsTo('App\Models\Categoria','catehorias_id');
+     return $this->belongsTo('App\Models\Categoria','categorias_id');
 }
 
 public function routers(){

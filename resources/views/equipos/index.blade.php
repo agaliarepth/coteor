@@ -49,7 +49,7 @@
         $(document).ready(function(){
 
 
-            listarCategorias();
+            listar();
         });
 
         function guardar(){
@@ -95,7 +95,7 @@
             });
 
         }
-        function listarCategorias(){
+        function listar(){
 
             $("#categorias-table tbody").remove();
 

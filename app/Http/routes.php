@@ -15,23 +15,31 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::resource('socios','SocioController');
-Route::group(['prefix'=>'socios'],function(){
-  //Route::post('store','SocioController@store');
-  //Route::get('create','SocioController@create');
- Route::resource('/','SocioController',['except'=>['store']]);
- Route::post('store','SocioController@store');
- Route::get('listar','SocioController@listar');
+Route::group(['prefix' => 'socios'], function () {
+    //Route::post('store','SocioController@store');
+    //Route::get('create','SocioController@create');
+    Route::resource('/', 'SocioController', ['except' => ['store']]);
+    Route::post('store', 'SocioController@store');
+    Route::get('listar', 'SocioController@listar');
 });
 
-Route::group(['prefix'=>'categorias'],function(){
-       Route::get('/','CategoriaController@index');
-       Route::post('store','CategoriaController@store');
-       Route::get('/listar','CategoriaController@listar');
-       Route::get('/edit/{id}','CategoriaController@edit');
+Route::group(['prefix' => 'categorias'], function () {
+    Route::get('/', 'CategoriaController@index');
+    Route::post('store', 'CategoriaController@store');
+    Route::get('/listar', 'CategoriaController@listar');
+    Route::get('/edit/{id}', 'CategoriaController@edit');
+    Route::post('/update/{id}', 'CategoriaController@update');
 
 });
+Route::group(['prefix' => 'equipos'], function () {
+    Route::get('/', 'EquipoController@index');
+});
+Route::group(['prefix' => 'items'], function () {
+    Route::get('/', 'ItemController@index');
+    Route::post('/store','ItemController@store');
+    Route::get('/listar','ItemController@listar');
+    Route::get('/edit/{id}', 'ItemController@edit');
+    Route::post('/update/{id}','ItemController@update');
 
-Route::group(['prefix'=>'equipos'],function(){
-      Route::get('/','EquipoController@index');
+
 });

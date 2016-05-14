@@ -3,22 +3,29 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                <h4 class="modal-title">Registrar Categoria</h4>
+                <h4 class="modal-title">Registrar Equipo</h4>
             </div>
             <form role="form"  action="#" method="post">
                 <section class="panel">
                     <div class="panel-body">
 
-                    <div class="col-md-4">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="" >Items</label>
+                                <input type="text" class="form-control" id="items_descrip"  name="items_descrip" placeholder="codigo item">
+                                <input type="hidden" name="items_id" id="items_id">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
                         <div class="form-group">
                             <label for="codigo">Codigo</label>
                             <input type="text" class="form-control" id="codigo" name="codigo" required  placeholder="codigo">
                         </div>
                     </div>
-                        <div class="col-md-8">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <label for="" >Descripcion</label>
-                                <input type="text" class="form-control" id="descripcion" required name="descripcion"placeholder="Descripcion">
+                                <input type="text" class="form-control" id="descripcion"  name="descripcion"placeholder="Descripcion">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -31,12 +38,6 @@
                             <div class="form-group">
                                 <label for="" >Modelo</label>
                                 <input type="text" class="form-control" id="modelo"  name="modelo" placeholder="modelo">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="" >Items</label>
-                                <input type="text" class="form-control" id="items_id"  name="items_id" placeholder="codigo item">
                             </div>
                         </div>
 
@@ -54,7 +55,7 @@
             <div class="modal-footer">
                 <input type="hidden" name='_token' value='{{csrf_token()}}' id="token">
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
-                <button type="button" class="btn btn-success" onclick="guardar();"> <i class=" fa fa-floppy-o"></i> Guardar</button>
+                <button type="button" class="btn btn-success" onclick="store();"> <i class=" fa fa-floppy-o"></i> Guardar</button>
 
             </div>
 

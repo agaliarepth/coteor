@@ -76,8 +76,8 @@
                             "searchable": false,
                             "render": function(data,type,row,meta) {
                                 var a='<div class="btn-group">' +
-                                        '<button class="btn btn-primary" type="button"><i class="fa fa-gears"></i> Acciones</button>' +
-                                        '<button data-toggle="dropdown" class="btn btn-success dropdown-toggle" type="button">' +
+                                        '<button class="btn btn-primary btn-xs" type="button"><i class="fa fa-gears"></i> Acciones</button>' +
+                                        '<button data-toggle="dropdown" class="btn btn-success dropdown-toggle btn-xs" type="button">' +
                                         '<span class="caret"></span>' +
                                         '<span class="sr-only">Toggle Dropdown</span>' +
                                         '</button>' +
@@ -148,9 +148,10 @@
             var route="items/update/"+id;
             var token=$("#token").val();
             var codigo=$("#codigo_edit").val();
-            var descripcion=$("#tipo_edit").val();
+            var descripcion=$("#descripcion_edit").val();
             var unidad=$("#unidad_edit").val();
-            var idcategorias=$("#idcategorias_edit").val();
+            var tipo=$("#tipo_edit").val();
+            var idcategorias=$("#id").val();
             $.ajax({
                 url:route,
                 type:"POST",
@@ -158,7 +159,14 @@
                 headers:{"X-CSRF-TOKEN":token},
                 data:{codigo:codigo,descripcion:descripcion,tipo:tipo,unidad:unidad,idcategorias:idcategorias},
                 success:function(response){
-                   // $("#editModal").modal('toggle');
+                   if(response.status=200){
+                       $("#editModal").modal('toggle');
+                       $('#items-table').DataTable().ajax.reload(null, false);
+
+                   }
+                   else
+                   swal(response.msg);
+
                 }
 
 

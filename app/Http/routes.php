@@ -33,13 +33,16 @@ Route::group(['prefix' => 'categorias'], function () {
 });
 Route::group(['prefix' => 'equipos'], function () {
     Route::get('/', 'EquipoController@index');
+    Route::post('/store', 'EquipoController@store');
 });
 Route::group(['prefix' => 'items'], function () {
     Route::get('/', 'ItemController@index');
     Route::post('/store','ItemController@store');
     Route::get('/listar','ItemController@listar');
     Route::get('/edit/{id}', 'ItemController@edit');
-    Route::post('/update/{id}','ItemController@update');
+    Route::post('update/{id}','ItemController@update');
+    Route::get('/autocompletar', array('uses'=>'ItemController@autocompletar'));
+
 
 
 });

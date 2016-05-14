@@ -97,7 +97,36 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return dd($request->all());
+        try{
+
+            $status=200;
+            $msg="actualizacion de registro exitoso";
+            $i=Item::find($id);
+
+           if(is_null($i)){
+               $status=404;
+               $msg="No se encuentra el registro ";
+           }
+            if($request->ajax()){
+
+                $i->fill($request->all());
+                $i->update();
+
+            }
+
+        }
+        catch(Exception $e){
+            $status=404;
+            $msg="hubo un errro al guardar los datos";
+        }
+        finally{
+            return response()->json([
+                "status"=>$status,
+                "msg"=>$msg
+            ]);
+        }
+
+
     }
 
     /**
@@ -117,5 +146,13 @@ class ItemController extends Controller
         return response()->json([
             "data"=>$i->toArray()
         ]);
+    }
+
+    public function autocompletar(Request $request)
+    {
+        $term= $request['term'];
+
+        $i=Item::where('descripcion', 'LIKE', '%'.$term.'%')->orWhere('codigo', 'LIKE', '%'.$term.'%')->Where('tipo','=','c')->where('estado','=','1')->get();
+        return response()->json($i);
     }
 }

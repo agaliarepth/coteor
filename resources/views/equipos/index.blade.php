@@ -48,13 +48,52 @@
 
         $(document).ready(function(){
 
+             $("#items_descrip").autocomplete({
+                 source:function(request,response){
+                     $.ajax({
+                         dataType:"json",
+                         contentType:false,
+                         url:"{{url('items/autocompletar/')}}",
+                         data:{
+                             term:this.term
+                         },
+                 success:function(data){
+                     response($.map(data,function(item){
+                     return{
+                         id:item.id,
+                         descripcion:item.descripcion,
+                         codigo:item.codigo
+                     }
+                     }));
+                 },
+                     });
+                 },
+                 minLength: 1,
 
-            listar();
+                 open: function () {
+                     $(this).addClass(".autocomplete-suggestions");
+                 },
+
+                 select: 	function productoSeleccionado(event, ui)
+                 {
+                     $( "#items_descrip" ).val( ui.item.descripcion );
+                     $( "#items_id" ).val( ui.item.id );
+
+
+
+                     return false;
+                 }
+             }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+                 return $( "<li>" )
+                         .data( "ui-autocomplete-item", item )
+                         .append( "<a><strong>" + item.codigo + "-" + item.descripcion + "</a>" )
+                         .appendTo( ul );
+             };
         });
 
-        function guardar(){
+        function store(){
 
-            var route="categorias/create";
+            var route="equipos/store";
             var descripcion=$("#descripcion").val();
             var token=$("#token").val();
             $.ajax({

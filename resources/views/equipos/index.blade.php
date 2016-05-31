@@ -14,7 +14,7 @@
                 <div class="panel-body col-md-12">
                     <section id="unseen">
 
-                        <table class="table table-bordered table-striped table-condensed" id="categorias-table">
+                        <table class="table table-bordered table-striped table-condensed" id="equipos-table">
                             <thead>
                             <tr>
                                 <th class="numeric">ID</th>
@@ -24,9 +24,7 @@
                                 <th >Marca</th>
                                 <th>Modelo</th>
                                 <th>Fecha alta</th>
-                                <th>Estado</th>
-
-                                <th class="numeric">Acciones</th>
+                                <th>Acciones</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -47,6 +45,67 @@
     <script type="text/javascript">
 
         $(document).ready(function(){
+
+            var tablaProductos=$('#equipos-table').dataTable( {
+                "ajax":{
+                    "url":'equipos/listar'
+                },
+                "bProcessing": true,
+                "fnRowCallback": function( nRow, aData, iDisplayIndex ) {
+                    if ( aData['estado'] == "0" )
+                    {
+                        $('td:eq(7)', nRow).html( '<a href="###" id="'+aData["id"]+'" class="btn btn-success btn-xs" onclick="habilitar(this.id)"> <i class="fa fa-check"></i>Habilitar</a>' );
+                    }
+                },
+                "columns": [
+                    { "data": "id" },
+                    { "data": "item.descripcion" },
+                    { "data": "codigo" },
+                    { "data": "descripcion" },
+                    { "data": "marca" },
+                    { "data": "modelo" },
+                    { "data": "fecha_alta" },
+                    { "data": "id",
+                        "orderable": false,
+                        "searchable": false,
+                        "render": function(data,type,row,meta) {
+                            var a='<div class="btn-group">' +
+                                    '<button class="btn btn-primary btn-xs" type="button"><i class="fa fa-gears"></i> Acciones</button>' +
+                                    '<button data-toggle="dropdown" class="btn btn-success  dropdown-toggle " type="button">' +
+                                    '<span class="caret"></span>' +
+                                    '<span class="sr-only">Toggle Dropdown</span>' +
+                                    '</button>' +
+                                    '<ul role="menu" class="dropdown-menu">' +
+                                    '<li><a href="#editModal" data-toggle="modal" id="'+data+'" onclick="abrirModalEditar(this.id);" ><i class="fa fa-edit"></i>Actualizar</a></li>' +
+                                    '<li><a href="#"  ><i class="fa fa-times"></i> Eliminar</a></li>' +
+                                    '<li><a href="#"><i class="fa fa-lock"></i> Deshabilitar</a></li>' +
+
+                                    '</ul></div>';
+
+                            return a;
+                        }
+                    }
+
+                ],
+                "bPaginate": true,
+                "oLanguage": {
+                    "sLengthMenu": "<B>Mostrando _MENU_ registros  por pagina</B>",
+                    "sZeroRecords": "Ningun Registro Encontrado",
+                    "sInfo": "Mostrar _START_ a _END_ de _TOTAL_ Registros",
+                    "sInfoEmpty": "<B>Mostrando 0 a 0 de 0 Registros</B>",
+                    "sInfoFiltered": "(Filtrados _MAX_  de un total de Registros)",
+                    "sSearch": "<B>BUSCAR:</B>"
+                },
+                "bLengthChange": true,
+                "bFilter": true,
+                "bSort": true,
+                "aaSorting": [ [1,'desc'] ],
+                "bInfo": true,
+                "bAutoWidth": false,
+                "iDisplayLength": -1,
+                "aLengthMenu": [[25,50,100,300,500,1000,-1], [25, 50, 100,300,500,1000, "Todos"]],
+                "sPaginationType": "full_numbers"
+            } );
 
              $("#items_descrip").autocomplete({
                  source:function(request,response){
@@ -78,7 +137,8 @@
                  {
                      $( "#items_descrip" ).val( ui.item.descripcion );
                      $( "#items_id" ).val( ui.item.id );
-
+                     $( "#codigoitem" ).val( ui.item.codigo );
+                     enableForm();
 
 
                      return false;
@@ -91,42 +151,72 @@
              };
         });
 
+function enableForm(){
+   $("#descripcion").attr("disabled",false);
+   $("#marca").attr("disabled",false);
+   $("#modelo").attr("disabled",false);
+   $("#observaciones").attr("disabled",false);
+   $("#codigo").attr("disabled",false);
+    $("#codigo").focus();
+
+
+}
+
         function store(){
 
             var route="equipos/store";
             var descripcion=$("#descripcion").val();
+            var items_id=$("#items_id").val();
+            var codigo=$("#codigo").val();
+            var marca=$("#marca").val();
+            var modelo=$("#modelo").val();
+            var observaciones=$("#observaciones").val();
             var token=$("#token").val();
             $.ajax({
                 url:route,
                 type:"POST",
                 dataType:"json",
                 headers:{"X-CSRF-TOKEN":token},
-                data:{descripcion:descripcion},
+                data:{descripcion:descripcion,items_id:items_id,codigo:codigo,marca:marca,modelo:modelo,observaciones:observaciones},
                 success:function(response){
 
                     $("#myModal").modal('toggle');
-                    listarCategorias();
+                    $('#equipos-table').DataTable().ajax.reload(null, false);
+                    $("#nuevoEquipoForm")[0].reset();
                 }
 
 
             });
         }
 
-        function actualizar(){
-            var id=$("#id").val();
+        function update(){
+            var id=$("#idequipo").val();
+            var items_id=$("#items_id_edit").val();
+            var codigo=$("#codigo_edit").val();
             var descripcion=$("#descripcion_edit").val();
-            var route="categorias/update/"+id;
+            var marca= $("#marca_edit").val();
+            var modelo=$("#modelo_edit").val();
+            var observaciones=$("#observaciones_edit").val();
+            var route="equipos/update/"+id;
             var token=$("#token").val();
             $.ajax({
                 url:route,
                 type:"POST",
                 dataType:"json",
                 headers:{"X-CSRF-TOKEN":token},
-                data:{id:id,descripcion:descripcion},
+                data:{id:id,items_id:items_id,codigo:codigo,descripcion:descripcion,marca:marca,modelo:modelo,observaciones:observaciones},
                 success:function(response){
 
-                    $("#editModal").modal('toggle');
-                    listarCategorias();
+                    if(response.status=="200") {
+
+                        $("#editModal").modal('toggle');
+                        $('#equipos-table').DataTable().ajax.reload(null, false);
+                    }
+                    else
+                    {
+                        swal("existio un error al guardar los datos.Intente nuevamente");
+                    }
+
 
                 }
 
@@ -134,34 +224,31 @@
             });
 
         }
-        function listar(){
 
-            $("#categorias-table tbody").remove();
 
-            var  route="categorias/listar";
+        function abrirModalEditar( id){
+
+            var route="equipos/edit/"+id;
             $.get(route,function(response){
 
+                if(response.status=='200') {
 
-                filas="";
-                $(response.categorias).each(function(key,value){
+                    $("#items_descrip_edit").val(response.equipo.item.descripcion);
+                    $("#items_id_edit").val(response.equipo.item.id);
+                    $("#codigoitem_edit").val(response.equipo.item.codigo);
+                    $("#codigo_edit").val(response.equipo.codigo);
+                    $("#descripcion_edit").val(response.equipo.descripcion);
+                    $("#marca_edit").val(response.equipo.marca);
+                    $("#modelo_edit").val(response.equipo.modelo);
+                    $("#observaciones_edit").val(response.equipo.observaciones);
+                    $("#idequipo").val(response.equipo.id);
 
-                    filas+="<tr><td>"+value.id+"</td><td>"+value.codigo+"</td><td>"+value.descripcion+"</td><td>   <a href='#editModal' data-toggle='modal' class='btn  btn-warning btn-xs' id='"+value.id+"' onclick='abrirModalCategoria(this.id);'> <i class='fa fa-edit'></i>  EDITAR</a> <a class='btn  btn-danger btn-xs'><i class='fa fa-eraser'></i>  BORRAR</a></td></tr>";
+                }
+                else{
+                    swal("Existio un error al cargar los datos.Intentelo nuevamente");
+                    $("#editModal").modal('toggle');
 
-                });
-
-                $("#categorias-table").append(filas);
-
-
-            });
-        }
-
-        function abrirModalCategoria( id){
-
-            var route="categorias/edit/"+id;
-            $.get(route,function(response){
-
-                $("#descripcion_edit").val(response.descripcion);
-                $("#id").val(response.id);
+                }
 
 
             });

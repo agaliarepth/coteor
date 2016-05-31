@@ -18,6 +18,11 @@
 <script type="text/javascript" language="javascript" src="{{ asset('js/advanced-datatable/js/jquery.dataTables.js')}}"></script>
 
 
+<!--pickers-->
+<script src="{{ asset('js/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+<script src="{{ asset('js/pickers-init.js') }}"></script>
+
+
 
 
 
@@ -42,6 +47,11 @@
 
 <!--Autocomplete -->
 <script src="{{ asset('js/jquery-autocomplete/jquery.auto-complete.js') }}"></script>
+
+<!--imprimir -->
+<script src="{{ asset('js/PrintArea.js') }}"></script>
+
+
 
 
 @yield('script')

@@ -113,4 +113,10 @@ class SocioController extends Controller
     {
         //
     }
+    public  function autocompletar(Request $request){
+        $term= $request['term'];
+
+        $i=Socio::where('apellidopaterno', 'LIKE', '%'.$term.'%')->orWhere('ci', 'LIKE', '%'.$term.'%')->get();
+        return response()->json($i);
+    }
 }

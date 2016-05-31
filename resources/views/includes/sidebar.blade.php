@@ -52,19 +52,18 @@ c           <!-- left side start-->
 
 
 
-                <li class="menu-list"><a href=""><i class="fa fa-book"></i> <span>ITEMS - EQUIPOS</span></a>
+                <li class="menu-list"><a href=""><i class="fa fa-book"></i> <span>ITEMS </span></a>
                     <ul class="sub-menu-list">
 
 
                         <li><a href="{{url('/categorias')}}"> CATEGORIAS</a></li>
                         <li><a href="{{url('/items')}}">  ITEMS</a></li>
-                        <li><a href="{{url('/equipos')}}">  EQUIPOS</a></li>
 
                     </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-tasks"></i> <span>ALMACEN</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="{{url('almacen/ingresos')}}"> INGRESOS</a></li>
+                        <li><a href="{{url('/ingresos')}}"> INGRESOS</a></li>
                         <li><a href=""> EGRESOS</a></li>
 
 
@@ -76,16 +75,30 @@ c           <!-- left side start-->
 
                 <li class="menu-list"><a href=""><i class="fa fa-tasks"></i> <span>CONTRATOS</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href=""> LISTAR CONTRATOS</a></li>
+                        <li><a href="{{url('/contratos')}}"> LISTAR CONTRATOS</a></li>
                         <li><a href=""> REGISTRAR CONTRATOS</a></li>
+
+                    </ul>
+                </li>
+                <li class="menu-list"><a href=""><i class="fa fa-tags"></i> <span>SERVICIOS</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="{{url('/servicios')}}"> LISTAR SERVICIOS</a></li>
+                        <li><a href=""> REGISTRAR SERVICIOS</a></li>
+
+                    </ul>
+                </li>
+                <li class="menu-list"><a href=""><i class="fa fa-user"></i> <span>TECNICOS</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="{{url('/tecnicos')}}"> LISTAR TECNICOS</a></li>
+                        <li><a href=""> REGISTRAR TECNICOS</a></li>
 
                     </ul>
                 </li>
 
                 <li class="menu-list"><a href="#"><i class="fa fa-th-list"></i> <span>ODTS</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href=""> LISTAR ODT</a></li>
-                        <li><a href="">REGISTRAR ODT</a></li>
+                        <li><a href="{{url('odts')}}"> LISTAR ODT</a></li>
+                        <li><a href="{{url('odts/create')}}}">REGISTRAR ODT</a></li>
 
                     </ul>
                 </li>

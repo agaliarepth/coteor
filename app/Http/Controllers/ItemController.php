@@ -47,10 +47,10 @@ class ItemController extends Controller
            $i = new Item();
            $status = 200;
            $msg = "Registro exitoso.";
-           $i->codigo = $request['codigo'];
+           $i->codigo = $request->categorias_codigo.$request['codigo'];
            $i->tipo = $request['tipo'];
            $i->descripcion=strtoupper($request['descripcion']);
-           $i->estado = '0';
+           $i->estado = '1';
            $i->fecha_alta = Carbon::now();
            $i->unidad = $request['unidad'];
            $i->categorias_id = $request['idcategorias'];
@@ -110,6 +110,7 @@ class ItemController extends Controller
             if($request->ajax()){
 
                 $i->fill($request->all());
+                $i->codigo = $request->categorias_codigo.$request->codigo;
                 $i->update();
 
             }
@@ -140,9 +141,7 @@ class ItemController extends Controller
         //
     }
     public  function listar(){
-//        $i=Item::all();
         $i=Item::with('categoria')->get();
-
         return response()->json([
             "data"=>$i->toArray()
         ]);
@@ -152,7 +151,27 @@ class ItemController extends Controller
     {
         $term= $request['term'];
 
-        $i=Item::where('descripcion', 'LIKE', '%'.$term.'%')->orWhere('codigo', 'LIKE', '%'.$term.'%')->Where('tipo','=','c')->where('estado','=','1')->get();
+        $i=Item::where('descripcion', 'LIKE', '%'.$term.'%')->orWhere('codigo', 'LIKE', '%'.$term.'%')->where('estado','=','1')->get();
         return response()->json($i);
     }
+public function validarItem($id){
+    try {
+        $status = 200;
+        $i = Item::where('tipo', '=', 'u')->get()->find($id);
+        if(is_null($i)){
+            $status=500;
+        }
+    }
+    catch(Exception $e){
+
+        $status=500;
+    }
+    finally{
+
+        return response()->json([
+            "status"=>$status
+        ]);
+    }
+
+}
 }

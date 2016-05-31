@@ -20,5 +20,9 @@ class Telefono extends Model
     public function socio(){
       return $this->belongsTo('App\Models\Socio','socios_id');
     }
+    public function contrato(){
+        return $this->hasOne('App\Models\Contrato');
 
+    }
+    
 }

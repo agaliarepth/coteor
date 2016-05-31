@@ -81,7 +81,7 @@
                               </div>
                               <div class="panel-footer">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}" id="_token" />
-                                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
+                                  <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
                                 <button type="submit" class="btn btn-success" > <i class=" fa fa-floppy-o"></i> Guardar</button>
                               </div>
                           </form>

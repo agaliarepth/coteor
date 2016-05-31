@@ -17,4 +17,7 @@ class Item extends Model
 public function routers(){
 return $this->hasMany('App\Models\Equipos');
 }
+    public function detalle_ingresos(){
+        return $this->hasMany('App\Models\DetalleIngreso','items_id','id');
+    }
 }

@@ -8,7 +8,8 @@
    <!--dynamic table-->
   <link href="{{ asset('js/advanced-datatable/css/demo_table_jui.css')}}" rel="stylesheet" />
   <link rel="stylesheet" href="{{ asset('js/data-tables/DT_bootstrap.css')}}" />
-
+<!--pickers-->
+<link href="{{ asset('js/bootstrap-datepicker/css/datepicker-custom.css')}}" rel="stylesheet">
 
   <!--dashboard calendar-->
   <link href="{{ asset('css/clndr.css')}}" rel="stylesheet">

@@ -6,7 +6,8 @@ if (top.location != location) {
 $(function(){
     window.prettyPrint && prettyPrint();
     $('.default-date-picker').datepicker({
-        format: 'mm-dd-yyyy'
+        format:'dd/mm/yyyy'
+
     });
     $('.dpYears').datepicker();
     $('.dpMonths').datepicker();
@@ -42,6 +43,7 @@ $(function(){
     var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 
     var checkin = $('.dpd1').datepicker({
+        format:'dd-mm-yyyy',
         onRender: function(date) {
             return date.valueOf() < now.valueOf() ? 'disabled' : '';
         }
@@ -55,6 +57,7 @@ $(function(){
             $('.dpd2')[0].focus();
         }).data('datepicker');
     var checkout = $('.dpd2').datepicker({
+        format:'dd-mm-yyyy',
         onRender: function(date) {
             return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
         }
